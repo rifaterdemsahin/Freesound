@@ -6,6 +6,7 @@ Downloads sample music from Freesound.org for YouTube videos
 
 import os
 import sys
+import re
 import requests
 import json
 from pathlib import Path
@@ -25,7 +26,7 @@ def download_freesound_samples():
     
     print("Freesound Music Downloader")
     print("=" * 50)
-    print(f"API Key configured: {api_key[:10]}...")
+    print("API Key configured: Yes")
     
     # Create downloads directory
     downloads_dir = Path("downloads")
@@ -92,8 +93,10 @@ def download_freesound_samples():
                     preview_response = requests.get(preview_url)
                     preview_response.raise_for_status()
                     
-                    # Create safe filename (replace spaces with underscores for compatibility)
-                    safe_name = "".join(c if c.isalnum() or c in ('-', '_') else '_' for c in sound_name).strip('_')
+                    # Create safe filename (replace problematic characters, collapse multiple underscores)
+                    safe_name = re.sub(r'[^\w\s-]', '', sound_name)  # Remove special chars except word chars, spaces, hyphens
+                    safe_name = re.sub(r'[-\s]+', '_', safe_name)  # Replace spaces/hyphens with single underscore
+                    safe_name = safe_name.strip('_')  # Remove leading/trailing underscores
                     filename = f"freesound_{sound_id}_{safe_name[:50]}.mp3"
                     filepath = downloads_dir / filename
                     

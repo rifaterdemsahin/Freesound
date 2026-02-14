@@ -57,9 +57,11 @@ The repository includes a GitHub Actions workflow (`.github/workflows/test-frees
 ### Configure Repository Secrets
 
 In your GitHub repository, add the following secret:
-- `freesound_clientid` - Your Freesound API key
+- `freesound_clientid` - Your Freesound API key (this will be mapped to FREESOUND_API_KEY in the workflow)
 
 Go to: Settings → Secrets and variables → Actions → New repository secret
+
+**Note:** The workflow maps the `freesound_clientid` secret to the `FREESOUND_API_KEY` environment variable used by the script.
 
 ### Trigger the Workflow
 
