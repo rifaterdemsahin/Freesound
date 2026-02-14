@@ -1,0 +1,41 @@
+name: Test Freesound Download
+
+on:
+  push:
+    branches: [ main, copilot/* ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test-download:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+    
+    - name: Test Freesound API download
+      env:
+        FREESOUND_API_KEY: ${{ secrets.freesound_clientid }}
+        FREESOUND_CLIENT_SECRET: ${{ secrets.freesound_secret }}
+      run: |
+        python 5_Symbols/freesound_downloader.py
+    
+    - name: Upload downloaded samples
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: freesound-samples
+        path: downloads/
+        retention-days: 7
