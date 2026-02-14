@@ -10,6 +10,9 @@ import re
 import requests
 import json
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def download_freesound_samples():

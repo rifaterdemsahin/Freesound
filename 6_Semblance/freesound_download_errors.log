@@ -1,0 +1,53 @@
+# Freesound API Download Errors
+
+This log documents the issues encountered while attempting to download samples from Freesound.org using the provided API credentials (client ID and secret).
+
+## Error 1: Invalid Token (Direct API Key Authentication)
+
+**Description:**
+Initially, the Freesound API client ID was used directly as an API key with `Token` authentication in the `Authorization` header, as suggested by some Freesound documentation references to `client_id` also being an `API key`.
+
+**Command Attempted:**
+`python 5_Symbols/freesound_downloader.py` (with `FREESOUND_API_KEY=EnTHL68qkYOK10Y2rsTE` in `.env`)
+
+**Error Output:**
+```
+Freesound Music Downloader
+==================================================
+API Key configured: Yes
+
+Searching for music samples...
+Query: music background
+Filter: duration:[10 TO 60] tag:music
+
+ERROR: API request failed: 401 Client Error: Unauthorized for url: https://freesound.org/apiv2/search/text/?query=music+background&filter=duration%3A%5B10+TO+60%5D+tag%3Amusic&fields=id%2Cname%2Cpreviews%2Cduration%2Clicense%2Cusername%2Cdownload%2Curl&page_size=3&sort=rating_desc
+Response: {"detail":"Invalid token"}
+```
+
+**Conclusion:**
+The provided `client_id` (EnTHL68qkYOK10Y2rsTE) is not accepted as a valid token for direct `Token` authentication in the Freesound API.
+
+## Error 2: Unauthorized Client (OAuth2 Client Credentials Flow)
+
+**Description:**
+Following the failure of direct API key authentication, an attempt was made to use the OAuth2 client credentials flow, which typically uses a `client_id` and `client_secret` to obtain an `access_token`.
+
+**Command Attempted:**
+`python 5_Symbols/freesound_downloader.py` (with `FREESOUND_CLIENT_ID=EnTHL68qkYOK10Y2rsTE` and `FREESOUND_CLIENT_SECRET=NXtWoj3NAhS8RU5ZLs7puMI4xICWWAPR1rEG8Yr3` in `.env`)
+
+**Error Output:**
+```
+Freesound Music Downloader
+==================================================
+API Credentials configured: Yes
+
+Obtaining OAuth2 access token...
+ERROR: Failed to obtain access token: 400 Client Error: Bad Request for url: https://freesound.org/apiv2/oauth2/access_token/
+Response: {"error": "unauthorized_client"}
+```
+
+**Conclusion:**
+The combination of `client_id` and `client_secret` provided is either incorrect or the application associated with these credentials on Freesound.org is not authorized to use the `client_credentials` grant type.
+
+**Current Status:**
+Unable to authenticate with the Freesound API using the provided credentials. A valid "Personal API Token" from Freesound.org account settings is requested from the user, or verification that the application credentials are correctly configured for the 'client_credentials' grant type.
