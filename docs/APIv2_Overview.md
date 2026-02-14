@@ -70,7 +70,7 @@ The format of the response can be specified in the request and can be one of JSO
 
 To specify the desired response format use a format request parameter. Specify the desired format in lowercase letters as follows:
 
-```
+```text
 https://freesound.org/apiv2/sounds/1234/?format=json
 https://freesound.org/apiv2/sounds/1234/?format=xml
 https://freesound.org/apiv2/sounds/1234/?format=yaml
