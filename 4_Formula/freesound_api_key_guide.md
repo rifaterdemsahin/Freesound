@@ -17,3 +17,6 @@ This guide outlines the steps to obtain an API key for Freesound.org, which is n
     *   Apply for a new API key if you don't have one or need a new set of credentials. Follow the on-screen instructions to complete the application process.
 
     Upon successful application, you will typically receive a `client_id` and a `client_secret`. The `client_id` (also sometimes referred to as the API key) is used for authentication. If the application requires a "Personal API Token" for direct `Token` authentication, you might need to look for that option in your Freesound account settings under API or developer section.
+
+Deleted The Key After getting Exposed in The Logs
+<img width="1728" height="516" alt="image" src="https://github.com/user-attachments/assets/d03065e1-c186-4c97-8e6d-1f4dc57555e6" />
