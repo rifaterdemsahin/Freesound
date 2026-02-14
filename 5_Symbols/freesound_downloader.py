@@ -11,6 +11,7 @@ import requests
 import json
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 
@@ -31,9 +32,13 @@ def download_freesound_samples():
     print("=" * 50)
     print("API Key configured: Yes")
     
-    # Create downloads directory
-    downloads_dir = Path("downloads")
-    downloads_dir.mkdir(exist_ok=True)
+    # Create weekly downloads directory under 3_Simulation
+    current_year = datetime.now().year
+    current_week = datetime.now().isocalendar()[1]
+    weekly_folder_name = f"{current_year}-{current_week:02d}"
+    
+    downloads_dir = Path(f"3_Simulation/downloads/{weekly_folder_name}")
+    downloads_dir.mkdir(parents=True, exist_ok=True)
     
     # Freesound API endpoint for text search
     search_url = "https://freesound.org/apiv2/search/text/"

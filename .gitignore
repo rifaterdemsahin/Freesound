@@ -1,3 +1,9 @@
 
 # Downloaded samples
-downloads/
+7_Testing_known/downloads/
+3_Simulation/downloads/
+
+# IDE and OS files
+.DS_Store
+.env
+.vscode/
