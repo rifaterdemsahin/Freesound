@@ -18,7 +18,6 @@ def download_freesound_samples():
     """
     # Get API credentials from environment variables
     api_key = os.environ.get('FREESOUND_API_KEY')
-    client_secret = os.environ.get('FREESOUND_CLIENT_SECRET')
     
     if not api_key:
         print("ERROR: FREESOUND_API_KEY environment variable not set")
@@ -93,8 +92,8 @@ def download_freesound_samples():
                     preview_response = requests.get(preview_url)
                     preview_response.raise_for_status()
                     
-                    # Create safe filename
-                    safe_name = "".join(c for c in sound_name if c.isalnum() or c in (' ', '-', '_')).strip()
+                    # Create safe filename (replace spaces with underscores for compatibility)
+                    safe_name = "".join(c if c.isalnum() or c in ('-', '_') else '_' for c in sound_name).strip('_')
                     filename = f"freesound_{sound_id}_{safe_name[:50]}.mp3"
                     filepath = downloads_dir / filename
                     

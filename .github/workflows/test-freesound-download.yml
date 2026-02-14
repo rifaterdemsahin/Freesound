@@ -28,7 +28,6 @@ jobs:
     - name: Test Freesound API download
       env:
         FREESOUND_API_KEY: ${{ secrets.freesound_clientid }}
-        FREESOUND_CLIENT_SECRET: ${{ secrets.freesound_secret }}
       run: |
         python 5_Symbols/freesound_downloader.py
     

@@ -36,7 +36,6 @@ Set your API credentials as environment variables:
 
 ```bash
 export FREESOUND_API_KEY="your_api_key_here"
-export FREESOUND_CLIENT_SECRET="your_client_secret_here"  # Optional
 ```
 
 ### 3. Install Dependencies
@@ -57,9 +56,8 @@ The repository includes a GitHub Actions workflow (`.github/workflows/test-frees
 
 ### Configure Repository Secrets
 
-In your GitHub repository, add the following secrets:
+In your GitHub repository, add the following secret:
 - `freesound_clientid` - Your Freesound API key
-- `freesound_secret` - Your Freesound client secret (optional)
 
 Go to: Settings → Secrets and variables → Actions → New repository secret
 
