@@ -1,0 +1,1 @@
+act as a video production asistant i need to score music and sound effects > use the input /Users/rifaterdemsahin/projects/Freesound/3_Simulation/downloads/2026-07/input > and download them to the /Users/rifaterdemsahin/projects/Freesound/3_Simulation/downloads/2026-07/output

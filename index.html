@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freesound Music Automation Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .section p, .section ul {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+
+        .section ul {
+            padding-left: 25px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .folder-structure {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .folder-item {
+            font-family: 'Courier New', monospace;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .folder-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .folder-name {
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .folder-desc {
+            color: #718096;
+            margin-left: 15px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .feature-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #edf2f7;
+            color: #2d3748;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block code {
+            font-size: 0.9em;
+        }
+
+        .api-info {
+            background: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .api-info strong {
+            color: #c53030;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Freesound Music Automation</h1>
+            <p>Automated music scoring and download system using Freesound.org API</p>
+        </header>
+
+        <div class="content">
+            <section class="section">
+                <h2>Project Overview</h2>
+                <p>
+                    The Freesound Music Automation project is a Python-based tool designed to automatically search,
+                    download, and organize background music samples from <a href="https://freesound.org" target="_blank">Freesound.org</a>
+                    for use in YouTube videos and other multimedia projects.
+                </p>
+                <p>
+                    This project leverages the Freesound APIv2 to programmatically access a vast library of
+                    Creative Commons licensed audio files, enabling automated music curation with intelligent
+                    filtering based on duration, ratings, and tags.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔍 Smart Search</h4>
+                        <p>Search and filter sounds by duration, tags, and quality ratings</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⬇️ Auto Download</h4>
+                        <p>Automatically download high-quality MP3 previews with metadata</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📅 Weekly Organization</h4>
+                        <p>Organize downloads by year-week folders (e.g., 2026-07)</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📝 Metadata Tracking</h4>
+                        <p>Save complete sound information including license and attribution</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔐 Secure Authentication</h4>
+                        <p>Environment-based API key management with .env support</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚡ API Integration</h4>
+                        <p>Full Freesound APIv2 integration with OAuth2 support</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Technology Stack</h2>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python 3.14</span>
+                    <span class="tech-badge">Requests Library</span>
+                    <span class="tech-badge">Freesound APIv2</span>
+                    <span class="tech-badge">python-dotenv</span>
+                    <span class="tech-badge">JSON</span>
+                    <span class="tech-badge">Git</span>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Project Structure</h2>
+                <p>The project follows a structured organizational approach:</p>
+
+                <div class="folder-structure">
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">1_Real_Unknown/</span>
+                        <span class="folder-desc">- Initial exploration and unknown scenarios</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">2_Environment/</span>
+                        <span class="folder-desc">- Environment configuration and setup</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">3_Simulation/</span>
+                        <span class="folder-desc">- Download storage (organized by week: YYYY-WW/)</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">4_Formula/</span>
+                        <span class="folder-desc">- API documentation and guides</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">5_Symbols/</span>
+                        <span class="folder-desc">- Main Python scripts (freesound_downloader.py)</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">6_Semblance/</span>
+                        <span class="folder-desc">- Similarity and comparison logic</span>
+                    </div>
+                    <div class="folder-item">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">7_Testing_known/</span>
+                        <span class="folder-desc">- Test downloads and validation</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>How It Works</h2>
+                <h3>1. Authentication</h3>
+                <p>The system uses API key authentication stored in environment variables:</p>
+                <div class="code-block">
+                    <code>FREESOUND_API_KEY=your_api_key_here</code>
+                </div>
+
+                <div class="api-info">
+                    <strong>Important:</strong> You need to obtain your API key from
+                    <a href="https://freesound.org/apiv2/apply" target="_blank">https://freesound.org/apiv2/apply</a>
+                </div>
+
+                <h3>2. Search Configuration</h3>
+                <p>The downloader searches for music with specific criteria:</p>
+                <ul>
+                    <li><strong>Duration:</strong> 10-60 seconds (ideal for background music)</li>
+                    <li><strong>Query:</strong> "music background"</li>
+                    <li><strong>Filter:</strong> Tagged as "music"</li>
+                    <li><strong>Sort:</strong> By highest rating</li>
+                    <li><strong>Results:</strong> Top 3 samples per run</li>
+                </ul>
+
+                <h3>3. Download Process</h3>
+                <p>For each sound found:</p>
+                <ul>
+                    <li>Downloads high-quality MP3 preview</li>
+                    <li>Saves to weekly folder (e.g., 3_Simulation/downloads/2026-07/)</li>
+                    <li>Creates sanitized filename: <code>freesound_{id}_{name}.mp3</code></li>
+                    <li>Generates JSON metadata file with license and attribution info</li>
+                </ul>
+
+                <h3>4. Metadata Storage</h3>
+                <p>Each download includes a JSON file with complete information:</p>
+                <div class="code-block">
+<code>{
+  "id": 12345,
+  "name": "Background Music Loop",
+  "duration": 30.5,
+  "username": "AudioCreator",
+  "license": "Creative Commons 0",
+  "url": "https://freesound.org/people/...",
+  "filename": "freesound_12345_Background_Music_Loop.mp3"
+}</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Getting Started</h2>
+
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Python 3.14 or higher</li>
+                    <li>Freesound API key</li>
+                    <li>Virtual environment (recommended)</li>
+                </ul>
+
+                <h3>Installation</h3>
+                <div class="code-block">
+<code># Clone the repository
+git clone &lt;repository-url&gt;
+
+# Navigate to project directory
+cd Freesound
+
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install requests python-dotenv
+
+# Create .env file
+echo "FREESOUND_API_KEY=your_api_key_here" &gt; .env</code>
+                </div>
+
+                <h3>Usage</h3>
+                <div class="code-block">
+<code># Run the downloader
+python 5_Symbols/freesound_downloader.py
+
+# Output will be saved to:
+# 3_Simulation/downloads/YYYY-WW/</code>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>API Features</h2>
+                <p>The Freesound APIv2 provides extensive capabilities:</p>
+                <ul>
+                    <li><strong>Text Search:</strong> Search by keywords, tags, and descriptions</li>
+                    <li><strong>Content Search:</strong> Filter by audio features (pitch, BPM, etc.)</li>
+                    <li><strong>Combined Search:</strong> Mix textual and content-based queries</li>
+                    <li><strong>Sound Download:</strong> Access original files or optimized previews</li>
+                    <li><strong>Upload Capability:</strong> Upload your own sounds (OAuth2 required)</li>
+                    <li><strong>User & Pack Info:</strong> Retrieve detailed metadata</li>
+                    <li><strong>Similar Sounds:</strong> Find sounds similar to a reference</li>
+                </ul>
+
+                <h3>Rate Limits</h3>
+                <ul>
+                    <li>Standard: 60 requests/minute, 2000 requests/day</li>
+                    <li>Write operations: 30 requests/minute, 500 requests/day</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>License Compliance</h2>
+                <p>
+                    All downloaded sounds from Freesound are released under Creative Commons licenses.
+                    The system automatically tracks license information for each download, ensuring
+                    proper attribution when using the sounds in your projects.
+                </p>
+                <p>
+                    Always check the <code>.json</code> metadata files for license details and required
+                    attribution before using sounds in commercial or public projects.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>Future Enhancements</h2>
+                <ul>
+                    <li>Automated scoring and ranking system</li>
+                    <li>Custom search parameter configuration</li>
+                    <li>Batch processing for multiple queries</li>
+                    <li>Audio analysis and categorization</li>
+                    <li>Integration with video editing workflows</li>
+                    <li>Web interface for easier management</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="https://freesound.org" target="_blank">Freesound.org</a> - Main website</li>
+                    <li><a href="https://freesound.org/apiv2/apply" target="_blank">API Key Application</a></li>
+                    <li><a href="https://freesound.org/docs/api/" target="_blank">API Documentation</a></li>
+                    <li><a href="http://groups.google.com/group/freesound-api" target="_blank">Freesound API Google Group</a></li>
+                    <li><a href="4_Formula/APIv2_Overview.md">Local API Documentation</a></li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Freesound Music Automation Project | Powered by Freesound.org APIv2</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">
+                This project uses the Freesound API but is not affiliated with or endorsed by Freesound.org
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
